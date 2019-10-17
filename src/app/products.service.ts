@@ -37,6 +37,7 @@ export class ProductsService {
       ProductDescription,
       ProductPrice
     };
+    console.log(obj);
     this
       .http
       .post(`${this.uri}/update/${id}`, obj)
