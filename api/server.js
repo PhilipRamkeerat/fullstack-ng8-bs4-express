@@ -3,25 +3,20 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   cors = require('cors'),
   mongoose = require('mongoose'),
-  // Added config DB
   config = require('./DB');
 
+const productRoute = require('./routes/product.route');
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
-  () => {
-    console.log("Database connected");
-  },
-  err => {
-    console.log('Cant connect to the database' + err)
-  }
+  () => { console.log('Database is connected') },
+  err => { console.log('Can not connect to the database' + err) }
 );
-
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-let port = process.env.PORT || 4000;
-
-const server = app.listen(function () {
+app.use('/products', productRoute);
+const port = process.env.PORT || 4000;
+const server = app.listen(port, function () {
   console.log('Listening on port ' + port);
 });
