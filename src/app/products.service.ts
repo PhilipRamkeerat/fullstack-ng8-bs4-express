@@ -19,4 +19,10 @@ export class ProductsService {
       .subscribe(res => console.log('Done'));
   }
 
+  getProducts() {
+    return this
+      .http
+      .get(`${this.uri}`);
+  }
+
 }
