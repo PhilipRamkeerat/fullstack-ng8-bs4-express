@@ -3,17 +3,17 @@ const Schema = mongoose.Schema;
 
 // set collection and schema
 let Product = new Schema({
-  ProductName: {
+  productName: {
     type: String
   },
-  ProductDescription: {
+  productDescription: {
     type: String
   },
-  ProductPrice: {
+  productPrice: {
     type: Number
   }
-},{
-    collection: 'Product'
+}, {
+  collection: 'Product'
 });
 
 module.exports = mongoose.model('Product', Product);

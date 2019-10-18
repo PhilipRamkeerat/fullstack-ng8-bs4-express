@@ -42,15 +42,16 @@ productRoutes.route('/edit/:id').get(function (req, res) {
 });
 
 // Update route
-productRoutes.route('/update/:id').post(function (req, res) {
+productRoutes.route('/update/:id').put(function (req, res) {
   Product.findById(req.params.id, function (err, product) {
     if (!product)
       res.status(404).send("Record not found");
     else {
-      product.ProductName = req.body.ProductName;
-      product.ProductDescription = req.body.ProductDescription;
-      product.ProductPrice = req.body.ProductPrice;
+      product.productName = req.body.productName;
+      product.productDescription = req.body.productDescription;
+      product.productPrice = req.body.productPrice;
 
+      console.log('Express => Update:id', product);
       product.save().then(product => {
         res.json('Update complete');
       })

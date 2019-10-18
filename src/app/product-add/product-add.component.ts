@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { Router } from '@angular/router';
+import Product from '../Product';
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
@@ -21,10 +22,11 @@ export class ProductAddComponent implements OnInit {
     });
   }
 
-  addProduct(productName, productDescription, productPrice) {
-    this.ps.addProduct(productName, productDescription, productPrice);
-    console.log('product add', productName, productDescription, productPrice);
-    this.router.navigate(['products']);
+  addProduct(productName: string, productDescription: string, productPrice: number) {
+    this.ps.addProduct(productName, productDescription, productPrice).subscribe(
+      _ => {
+        this.router.navigate(['products']);
+      });
   }
 
   ngOnInit() {
