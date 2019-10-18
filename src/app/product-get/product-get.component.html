@@ -11,9 +11,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products | paginate: config">
-        <td>{{ product.ProductName }}</td>
-        <td>{{ product.ProductDescription }}</td>
-        <td>{{ product.ProductPrice }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.productDescription }}</td>
+        <td>{{ product.productPrice }}</td>
         <td> {{product._id}}</td>
         <td><a [routerLink]="['/edit', product._id]" class="btn btn-primary">Edit</a></td>
         <td><a [routerLink]="" class="btn btn-danger" (click)="deleteProduct(product._id)">Delete</a></td>

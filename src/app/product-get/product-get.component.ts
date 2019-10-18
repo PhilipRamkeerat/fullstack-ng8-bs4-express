@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked, AfterContentInit, OnDestroy } from '@angular/core';
 import Product from '../Product';
 import { ProductsService } from '../products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-get',
@@ -8,10 +9,11 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./product-get.component.scss']
 })
 export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
-  products: Product[];
+  products: Product[] = [];
   productLenght: any;
   config: any;
-  constructor(private ps: ProductsService) {
+
+  constructor(private productService: ProductsService, private router: Router) {
     this.config = {
       itemsPerPage: 5,
       currentPage: 1,
@@ -31,19 +33,18 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getProducts();
   }
 
-  deleteProduct(id) {
-    this.ps.deleteProduct(id).subscribe(res => {
-      this.getProducts();
+  deleteProduct(id: any) {
+    this.productService.deleteProduct(id).subscribe(res => {
+      this.router.navigate(['products']);
     });
   }
 
   getProducts() {
-    this.ps
-      .getProducts()
-      .subscribe((data: Product[]) => {
-        this.products = data;
-        this.productLenght = data.length;
-        console.log(this.products);
+    this.productService.getProducts()
+      .subscribe((product: Product[]) => {
+        console.log('getProducts', this.products);
+        this.products = product;
+        this.productLenght = product.length;
       });
   }
 
