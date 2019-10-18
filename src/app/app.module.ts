@@ -9,7 +9,7 @@ import { ProductGetComponent } from './product-get/product-get.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsService } from './products.service';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +21,8 @@ import { ProductsService } from './products.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]
