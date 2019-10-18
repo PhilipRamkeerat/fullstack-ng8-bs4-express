@@ -1,46 +1,46 @@
 <div class="card">
   <div class="card-body">
-    <form [formGroup]="angForm" novalidate>
+    <form [formGroup]="productForm" novalidate>
       <div class="form-group">
         <label class="col-md-4">Product Name</label>
-        <input type="text" class="form-control" formControlName="ProductName" #ProductName />
+        <input type="text" class="form-control" formControlName="productName" #productName />
       </div>
       <!-- Show error if Invalid -->
       <div
-        *ngIf="angForm.controls['ProductName'].invalid && (angForm.controls['ProductName'].dirty || angForm.controls['ProductName'].touched)"
+        *ngIf="productForm.controls['productName'].invalid && (productForm.controls['productName'].dirty || productForm.controls['productName'].touched)"
         class="alert alert-danger">
-        <div *ngIf="angForm.controls['ProductName'].errors.required">
+        <div *ngIf="productForm.controls['productName'].errors.required">
           Product Name is required.
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4">Product Description </label>
-        <textarea class="form-control" rows=7 cols="5" formControlName="ProductDescription"
-          #ProductDescription></textarea>
+        <textarea class="form-control" rows=7 cols="5" formControlName="productDescription"
+          #productDescription></textarea>
       </div>
       <!-- Show error if Invalid -->
       <div
-        *ngIf="angForm.controls['ProductDescription'].invalid && (angForm.controls['ProductDescription'].dirty || angForm.controls['ProductDescription'].touched)"
+        *ngIf="productForm.controls['productDescription'].invalid && (productForm.controls['productDescription'].dirty || productForm.controls['productDescription'].touched)"
         class="alert alert-danger">
-        <div *ngIf="angForm.controls['ProductDescription'].errors.required">
+        <div *ngIf="productForm.controls['productDescription'].errors.required">
           Product Description is required.
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4">Product Price</label>
-        <input type="text" class="form-control" formControlName="ProductPrice" #ProductPrice />
+        <input type="text" class="form-control" formControlName="productPrice" #productPrice />
       </div>
       <!-- Show error if Invalid -->
       <div
-        *ngIf="angForm.controls['ProductPrice'].invalid && (angForm.controls['ProductPrice'].dirty || angForm.controls['ProductPrice'].touched)"
+        *ngIf="productForm.controls['productPrice'].invalid && (productForm.controls['productPrice'].dirty || productForm.controls['productPrice'].touched)"
         class="alert alert-danger">
-        <div *ngIf="angForm.controls['ProductPrice'].errors.required">
+        <div *ngIf="productForm.controls['productPrice'].errors.required">
           Product Price is required.
         </div>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-primary" [disabled]="angForm.pristine || angForm.invalid"
-          (click)="addProduct(ProductName.value, ProductDescription.value, ProductPrice.value)">
+        <button type="button" class="btn btn-primary" [disabled]="productForm.pristine || productForm.invalid"
+          (click)="addProduct(productName.value, productDescription.value, productPrice.value)">
           Create Product
         </button>
       </div>

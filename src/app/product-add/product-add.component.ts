@@ -8,21 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-add.component.scss']
 })
 export class ProductAddComponent implements OnInit {
-  angForm: FormGroup;
+  productForm: FormGroup;
   constructor(private fb: FormBuilder, private ps: ProductsService, private router: Router) {
-    this.createForm();
+    this.createProductForm();
   }
 
-  createForm() {
-    this.angForm = this.fb.group({
-      ProductName: ['', Validators.required],
-      ProductDescription: ['', Validators.required],
-      ProductPrice: ['', Validators.required]
+  createProductForm() {
+    this.productForm = this.fb.group({
+      productName: ['', Validators.required],
+      productDescription: ['', Validators.required],
+      productPrice: ['', Validators.required]
     });
   }
 
-  addProduct(ProductName, ProductDescription, ProductPrice) {
-    this.ps.addProduct(ProductName, ProductDescription, ProductPrice);
+  addProduct(productName, productDescription, productPrice) {
+    this.ps.addProduct(productName, productDescription, productPrice);
     this.router.navigate(['products']);
   }
 
