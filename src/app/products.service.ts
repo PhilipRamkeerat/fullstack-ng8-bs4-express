@@ -107,13 +107,6 @@ export class ProductsService {
       .get(`${this.uri}/edit/${id}`);
   }
 
-  // DELETE: product
-  // deleteProduct(id) {
-  //   console.log('Delete product service id: ', id);
-  //   return this
-  //     .http
-  //     .get(`${this.uri}/delete/${id}`);
-  // }
   deleteProduct(id: any): Observable<Product> {
     const url = `${this.productUrl}/delete/${id}`;
 
