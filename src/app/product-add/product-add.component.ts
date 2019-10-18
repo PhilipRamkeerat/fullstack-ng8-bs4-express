@@ -23,7 +23,7 @@ export class ProductAddComponent implements OnInit {
 
   addProduct(productName, productDescription, productPrice) {
     this.ps.addProduct(productName, productDescription, productPrice);
-    console.log('product add', productName, productDescription, productPrice)
+    console.log('product add', productName, productDescription, productPrice);
     this.router.navigate(['products']);
   }
 
