@@ -12,6 +12,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # How to Start App or Customize
 
 # Back end
+* /api folder
 ```
 npm install
 nodemon server or npm start
