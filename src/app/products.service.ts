@@ -45,6 +45,7 @@ export class ProductsService {
   }
 
   deleteProduct(id) {
+    console.log('Delete product service id: ', id);
     return this
       .http
       .get(`${this.uri}/delete/${id}`);
