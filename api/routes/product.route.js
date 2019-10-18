@@ -63,7 +63,7 @@ productRoutes.route('/update/:id').put(function (req, res) {
 });
 
 // Delete route
-productRoutes.route('/delete/:id').get(function (req, res) {
+productRoutes.route('/delete/:id').delete(function (req, res) {
   Product.findByIdAndRemove({ _id: req.params.id }, function (err, product) {
     if (err) res.json(err);
     else res.json('Successfully removed');

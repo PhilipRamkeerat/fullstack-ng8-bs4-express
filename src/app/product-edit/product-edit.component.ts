@@ -12,7 +12,7 @@ export class ProductEditComponent implements OnInit {
   product: any = {};
   productId = 0;
 
-  constructor(private route: ActivatedRoute, private router: Router, private ps: ProductsService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductsService, private fb: FormBuilder) {
     this.createForm();
   }
 
@@ -29,18 +29,16 @@ export class ProductEditComponent implements OnInit {
       this.productId = params.id;
     });
 
-    this.ps.updateProduct(productName, productDescription, productPrice, this.productId).subscribe(
+    this.productService.updateProduct(productName, productDescription, productPrice, this.productId).subscribe(
       _ => {
         this.router.navigate(['products']);
       });
   }
 
-
-
   ngOnInit() {
     this.route.params.subscribe(params => {
       const idProduct = 'id';
-      this.ps.editProduct(params[idProduct]).subscribe(res => {
+      this.productService.editProduct(params[idProduct]).subscribe(res => {
         this.product = res;
       });
     });

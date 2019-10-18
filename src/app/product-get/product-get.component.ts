@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked, AfterContentInit, OnDestroy } from '@angular/core';
 import Product from '../Product';
 import { ProductsService } from '../products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-get',
@@ -12,7 +13,7 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
   productLenght: any;
   config: any;
 
-  constructor(private productService: ProductsService) {
+  constructor(private productService: ProductsService, private router: Router) {
     this.config = {
       itemsPerPage: 5,
       currentPage: 1,
@@ -32,9 +33,9 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getProducts();
   }
 
-  deleteProduct(id) {
+  deleteProduct(id: any) {
     this.productService.deleteProduct(id).subscribe(res => {
-      this.getProducts();
+      this.router.navigate(['products']);
     });
   }
 

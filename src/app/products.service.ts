@@ -17,7 +17,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  // Get Products
+  // Get all products
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productUrl).pipe(
       tap(_ => console.log('Fetched products')),
@@ -42,9 +42,8 @@ export class ProductsService {
         catchError(this.handleError<Product>(`getProduct id=${id}`))
       );
   }
-  /**
-   * Get product by id. Will 404 if id not found
-   */
+
+  // Get product by id
   getProduct(id: number): Observable<Product> {
     const url = `${this.productUrl}/edit/${id}`;
     return this.http.get<Product>(url).pipe(
@@ -65,10 +64,7 @@ export class ProductsService {
     );
   }
 
-  // Save Methods //
-
-  // Post new hero to the server
-
+  // Post new product
   addProduct(productName: string, productDescription: string, productPrice: number): Observable<Product> {
     const url = `${this.productUrl}/add`;
     const productObj = {
@@ -84,9 +80,7 @@ export class ProductsService {
     );
   }
 
-  /**
-   * Put Method to update product
-   */
+  // Update product
   updateProduct(productName: string, productDescription: string, productPrice: number, id: any): Observable<any> {
     const url = `${this.productUrl}/update/${id}`;
 
@@ -113,12 +107,21 @@ export class ProductsService {
       .get(`${this.uri}/edit/${id}`);
   }
 
+  // DELETE: product
+  // deleteProduct(id) {
+  //   console.log('Delete product service id: ', id);
+  //   return this
+  //     .http
+  //     .get(`${this.uri}/delete/${id}`);
+  // }
+  deleteProduct(id: any): Observable<Product> {
+    const url = `${this.productUrl}/delete/${id}`;
 
-  deleteProduct(id) {
-    console.log('Delete product service id: ', id);
-    return this
-      .http
-      .get(`${this.uri}/delete/${id}`);
+    console.log('url do deleteProduct', url);
+    return this.http.delete<Product>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`updated product id = ${id}`)),
+      catchError(this.handleError<any>('error on deleteProduct'))
+    );
   }
 
   /**
