@@ -8,7 +8,6 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductsService {
-  uri = 'http://localhost:4000/products';
   private productUrl = 'http://localhost:4000/products';
 
   httpOptions = {
@@ -80,12 +79,6 @@ export class ProductsService {
       tap(_ => this.log(`updated product id ${id}`)),
       catchError(this.handleError<any>('error updateProduct'))
     );
-  }
-
-  editProduct(id) {
-    return this
-      .http
-      .get(`${this.uri}/edit/${id}`);
   }
 
   deleteProduct(id: any): Observable<Product> {
