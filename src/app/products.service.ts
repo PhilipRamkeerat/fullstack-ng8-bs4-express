@@ -91,6 +91,13 @@ export class ProductsService {
     );
   }
 
+  editProduct(id) {
+    return this
+      .http
+      .get(`${this.productUrl}/edit/${id}`);
+  }
+
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
