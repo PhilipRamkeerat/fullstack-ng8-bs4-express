@@ -51,4 +51,11 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
   pageChanged(event) {
     this.config.currentPage = event;
   }
+
+  searchProduct(word: string) {
+    this.productService.searchProductBeta(word).subscribe(
+      result => console.log('result', result)
+    );
+
+  }
 }

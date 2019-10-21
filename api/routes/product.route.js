@@ -70,6 +70,21 @@ productRoutes.route('/delete/:id').delete(function (req, res) {
   });
 });
 
+// Search Route
+productRoutes.route('/search/:word').get(function (req, res) {
+  let word = req.params.word;
+  Product.find({ productName: word }, function (err, product) {
+    console.log("Product", product);
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(product);
+    }
+  });
+});
+
+
+
 module.exports = productRoutes;
 
 

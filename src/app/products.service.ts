@@ -97,6 +97,10 @@ export class ProductsService {
       .get(`${this.productUrl}/edit/${id}`);
   }
 
+  searchProductBeta(word: string) {
+    console.log('word s', word);
+    return this.http.get(`${this.productUrl}/search/${word}`);
+  }
 
   /**
    * Handle Http operation that failed.
