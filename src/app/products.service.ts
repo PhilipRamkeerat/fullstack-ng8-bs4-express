@@ -74,21 +74,9 @@ export class ProductsService {
   }
 
   // Update product
-  updateProduct(productName: string, productDescription: string, productPrice: number, id: any): Observable<any> {
+  updateProduct(product: Product, id: any): Observable<any> {
     const url = `${this.productUrl}/update/${id}`;
-
-    // Validating values
-    productName = String(productName);
-    productDescription = String(productDescription);
-    productPrice = Number(productPrice);
-
-    const obj = {
-      productName,
-      productDescription,
-      productPrice
-    };
-
-    return this.http.put(url, obj).pipe(
+    return this.http.put(url, product).pipe(
       tap(_ => this.log(`updated product id ${id}`)),
       catchError(this.handleError<any>('error updateProduct'))
     );
