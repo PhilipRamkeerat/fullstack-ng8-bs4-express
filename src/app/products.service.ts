@@ -31,6 +31,7 @@ export class ProductsService {
    */
   getProductNo404<Data>(id: number): Observable<Product> {
     const url = `${this.productUrl}/?id=${id}`;
+
     return this.http.get<Product[]>(url)
       .pipe(
         map(products => products[0]),
@@ -45,19 +46,20 @@ export class ProductsService {
   // Get product by id
   getProduct(id: number): Observable<Product> {
     const url = `${this.productUrl}/edit/${id}`;
+
     return this.http.get<Product>(url).pipe(
       tap(_ => this.log(`Fetched product id = ${id}`)),
       catchError(this.handleError<Product>(`error on getProduct id=${id}`))
     );
   }
 
-  // TODO: Search Service
+  // Search for product name or product description
   searchProduct(term: string): Observable<Product[]> {
     if (!term.trim()) {
       return of([]); // Return empty product array
     }
 
-    return this.http.get<Product[]>(`${this.productUrl}/?name=${term}`).pipe(
+    return this.http.get<Product[]>(`${this.productUrl}/search/${term}`).pipe(
       tap(_ => this.log(`found heroes matching "${term}" `)),
       catchError(this.handleError<Product[]>('error searchProducts', []))
     );
@@ -66,6 +68,7 @@ export class ProductsService {
   // Post new product
   addProduct(product: Product): Observable<Product> {
     const url = `${this.productUrl}/add`;
+
     return this.http.post<Product>(url, product, this.httpOptions).pipe(
       tap((newProduct: Product) => this.log(`added product w/ id=${newProduct._id}`)),
       catchError(this.handleError<Product>(`Error on addProduct`))
@@ -75,6 +78,7 @@ export class ProductsService {
   // Update product
   updateProduct(product: Product, id: any): Observable<any> {
     const url = `${this.productUrl}/update/${id}`;
+
     return this.http.put(url, product).pipe(
       tap(_ => this.log(`updated product id ${id}`)),
       catchError(this.handleError<any>('error updateProduct'))
@@ -95,11 +99,6 @@ export class ProductsService {
     return this
       .http
       .get(`${this.productUrl}/edit/${id}`);
-  }
-
-  searchProductBeta(word: string) {
-    console.log('word s', word);
-    return this.http.get(`${this.productUrl}/search/${word}`);
   }
 
   /**

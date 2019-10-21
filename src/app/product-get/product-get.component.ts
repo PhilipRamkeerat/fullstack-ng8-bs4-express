@@ -53,9 +53,10 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   searchProduct(word: string) {
-    this.productService.searchProductBeta(word).subscribe(
-      result => console.log('result', result)
-    );
-
+    this.productService.searchProduct(word).subscribe(
+      data => {
+        console.log('Debugger', data);
+      });
   }
+
 }

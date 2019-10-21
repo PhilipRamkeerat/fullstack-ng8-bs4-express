@@ -1,6 +1,5 @@
-/**
- * Using mongose ORM to save datas in Mongo Database
- */
+// Using mongose ORM to save datas in Mongo Database
+
 const express = require('express');
 const app = express();
 const productRoutes = express.Router();
@@ -8,10 +7,10 @@ const productRoutes = express.Router();
 // Require product model
 let Product = require('../models/Product');
 
-// Store Route
-// Add endpoint
+// Save product
 productRoutes.route('/add').post(function (req, res) {
   let product = new Product(req.body);
+
   product.save()
     .then(product => {
       res.status(200).json({ 'Product': 'Product has been added successfully' });
@@ -21,7 +20,7 @@ productRoutes.route('/add').post(function (req, res) {
     });
 });
 
-// get endpoint route
+// Get products
 productRoutes.route('/').get(function (req, res) {
   Product.find(function (err, products) {
     if (err) {
@@ -33,15 +32,16 @@ productRoutes.route('/').get(function (req, res) {
   });
 });
 
-// Edit route
+// Get product informations for update
 productRoutes.route('/edit/:id').get(function (req, res) {
   let id = req.params.id;
+
   Product.findById(id, function (err, product) {
     res.json(product);
   });
 });
 
-// Update route
+// PUT endpoint for product to update
 productRoutes.route('/update/:id').put(function (req, res) {
   Product.findById(req.params.id, function (err, product) {
     if (!product)
@@ -51,7 +51,6 @@ productRoutes.route('/update/:id').put(function (req, res) {
       product.productDescription = req.body.productDescription;
       product.productPrice = req.body.productPrice;
 
-      console.log('Express => Update:id', product);
       product.save().then(product => {
         res.json('Update complete');
       })
@@ -62,7 +61,7 @@ productRoutes.route('/update/:id').put(function (req, res) {
   });
 });
 
-// Delete route
+// Delete Product
 productRoutes.route('/delete/:id').delete(function (req, res) {
   Product.findByIdAndRemove({ _id: req.params.id }, function (err, product) {
     if (err) res.json(err);
@@ -70,20 +69,23 @@ productRoutes.route('/delete/:id').delete(function (req, res) {
   });
 });
 
-// Search Route
+/*
+* Search product by productName or productDescription
+* And return json with these informations about product.
+*/
 productRoutes.route('/search/:word').get(function (req, res) {
   let word = req.params.word;
-  Product.find({ productName: word }, function (err, product) {
-    console.log("Product", product);
+
+  Product.find({
+    productName: { $regex: new RegExp(word), $options: 'i' }
+  }, function (err, product) {
     if (err) {
-      console.log(err);
+      res.json(err);
     } else {
       res.json(product);
     }
-  });
+  })
 });
-
-
 
 module.exports = productRoutes;
 
