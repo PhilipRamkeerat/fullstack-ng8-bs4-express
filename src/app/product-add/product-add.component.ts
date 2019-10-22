@@ -22,14 +22,16 @@ export class ProductAddComponent implements OnInit {
     });
   }
 
-  addProduct(productName: string, productDescription: string, productPrice: number) {
-    this.ps.addProduct(productName, productDescription, productPrice).subscribe(
+  addProduct(product: Product) {
+    this.ps.addProduct(this.productForm.value).subscribe(
       _ => {
         this.router.navigate(['products']);
       });
   }
 
+
   ngOnInit() {
+
   }
 
 }

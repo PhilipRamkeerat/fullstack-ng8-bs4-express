@@ -51,4 +51,6 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
   pageChanged(event) {
     this.config.currentPage = event;
   }
+
+
 }
