@@ -1,5 +1,5 @@
-<div class="container">
-  <table class="table table-hover">
+<div class="container-fluid">
+  <table class="table table-striped">
     <thead>
       <tr>
         <td>Product Name</td>
@@ -20,6 +20,5 @@
       </tr>
     </tbody>
   </table>
-  <a class="btn btn-primary" (click)="searchProduct('Phil');">Buscar</a>
   <pagination-controls *ngIf="productLenght" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>

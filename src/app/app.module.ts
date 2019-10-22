@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]

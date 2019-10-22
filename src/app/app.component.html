@@ -1,20 +1,62 @@
-<nav class="navbar navbar-expand-sm bg-light">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a routerLink="product/create" class="nav-link" routerLinkActive="active">
-          Create Product
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="products" class="nav-link" routerLinkActive="active">
-          Products
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Dashboard Products</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+      aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div class="container">
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="product/create" routerLinkActive="active">Create Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="products" routerLinkActive="active">List Products</a>
+        </li>
+      </ul>
+      <div class="form-inline">
+        <input [(ngModel)]="searchWord" class="form-control mr-sm-2" type="search" placeholder="Search products."
+          aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" (click)="searchProduct();">Search</button>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container-fluid" *ngIf="products">
+  <h1 style="background: red;"> TEMPORARY TABLE Search ... </h1>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Description</th>
+        <th scope="col">Product Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <th scope="row">{{product.productName}}</th>
+        <td>{{product.productDescription}}</td>
+        <td>{{product.productPrice}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- <div class="container-fluid">
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome !</h1>
+    <p class="lead">Make complete management of your products.</p>
+    <hr class="my-4">
+    <p>Through the navigation menu, add, remove, change and search for products registered in your company.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" routerLink="product/create" routerLinkActive="active" role="button">Add
+        Product</a>
+    </p>
+  </div>
+</div> -->
+<div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
