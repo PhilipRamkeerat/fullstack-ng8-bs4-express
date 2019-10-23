@@ -15,34 +15,9 @@
           <a class="nav-link" routerLink="products" routerLinkActive="active">List Products</a>
         </li>
       </ul>
-      <div class="form-inline">
-        <input [(ngModel)]="searchWord" class="form-control mr-sm-2" type="search" placeholder="Search products."
-          aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" (click)="searchProduct();">Search</button>
-      </div>
+
     </div>
   </nav>
-</div>
-
-<div class="container-fluid" *ngIf="products">
-  <h1 style="background: red;"> TEMPORARY TABLE Search ... </h1>
-  <table class="table table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Product Name</th>
-        <th scope="col">Product Description</th>
-        <th scope="col">Product Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <th scope="row">{{product.productName}}</th>
-        <td>{{product.productDescription}}</td>
-        <td>{{product.productPrice}}</td>
-      </tr>
-
-    </tbody>
-  </table>
 </div>
 
 <!-- <div class="container-fluid">

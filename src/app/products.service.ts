@@ -9,7 +9,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class ProductsService {
   private productUrl = 'http://localhost:4000/products';
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'Application/json' })
   };
@@ -58,9 +57,8 @@ export class ProductsService {
     if (!term.trim()) {
       return of([]); // Return empty product array
     }
-
     return this.http.get<Product[]>(`${this.productUrl}/search/${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}" `)),
+      tap(_ => this.log(`found products matching "${term}" `)),
       catchError(this.handleError<Product[]>('error searchProducts', []))
     );
   }

@@ -9,17 +9,10 @@ import { ProductsService } from './products.service';
 export class AppComponent {
   title = 'ng8-mongo-express-crud';
   products: any;
-  searchWord: any;
+
   constructor(private productService: ProductsService) {
 
   }
 
-  searchProduct(word: string) {
-    word = this.searchWord;
-    this.productService.searchProduct(word).subscribe(
-      data => {
-        console.log('Debugger', data);
-        this.products = data;
-      });
-  }
+
 }
