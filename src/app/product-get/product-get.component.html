@@ -1,4 +1,11 @@
 <div class="container-fluid">
+  <div class="form-inline mt-2 mb-2">
+    <input [(ngModel)]="searchWord" class="form-control mr-sm-2" type="search" placeholder="Search products."
+      aria-label="Search">
+    <button class="btn btn-primary btn-outline-light my-2 my-sm-0" (click)="searchProduct();">Search</button>
+    <button *ngIf="isSearch" class="btn btn-secondary btn-outline-light my-2 my-sm-0" (click)="getProducts();">Reset Search</button>
+
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -10,6 +17,17 @@
       </tr>
     </thead>
     <tbody>
+      <div *ngIf="searchNotFound">
+        <div class="alert alert-danger" role="alert">
+          <p>
+            No products with the name: {{searchWord}}, were found.
+          </p>
+        </div>
+        <p>
+          Want to go back to the list of all products?
+        </p>
+        <button class="btn btn-primary btn-outline-light my-2 my-sm-0" (click)="getAllProducts();">All Products</button>
+      </div>
       <tr *ngFor="let product of products | paginate: config">
         <td>{{ product.productName }}</td>
         <td>{{ product.productDescription }}</td>

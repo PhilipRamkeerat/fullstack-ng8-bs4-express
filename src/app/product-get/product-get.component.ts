@@ -12,6 +12,9 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
   products: Product[] = [];
   productLenght: any;
   config: any;
+  searchWord: any;
+  searchNotFound = false;
+  isSearch = false;
 
   constructor(private productService: ProductsService, private router: Router) {
     this.config = {
@@ -35,11 +38,13 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   deleteProduct(id: any) {
     this.productService.deleteProduct(id).subscribe(res => {
-      this.router.navigate(['products']);
+      this.getProducts();
     });
   }
 
   getProducts() {
+    if (this.isSearch) { this.isSearch = false; }
+
     this.productService.getProducts()
       .subscribe((product: Product[]) => {
         console.log('getProducts', this.products);
@@ -52,5 +57,30 @@ export class ProductGetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.config.currentPage = event;
   }
 
+  searchProduct(word: string) {
+    word = this.searchWord;
+    this.isSearch = true;
+    if (!word) {
+      this.getProducts();
+    } else {
+      this.productService.searchProduct(word).subscribe(
+        data => {
+          this.products = data;
+          console.log('Data', data.length);
+          if (data.length === 0) {
+            this.searchNotFound = true;
+          } else {
+            this.searchNotFound = false;
+          }
+        }
+      );
+    }
+  }
+
+  // Remove error msg and list all products
+  getAllProducts() {
+    this.searchNotFound = false;
+    this.getProducts();
+  }
 
 }
