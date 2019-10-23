@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
+# Wiki
+[Project Wiki](https://github.com/PhilipRamkeerat/ng8-mongo-express-crud/wiki/Docker-MongoDB-configuration)
+
 # Requires
 * Node 8x +
 * Mongo 4.x + ex: (localhost:27017)
